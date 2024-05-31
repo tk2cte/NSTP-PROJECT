@@ -1,0 +1,95 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #4d6a34 0%, #274234 100%);
+    font-family: Arial, sans-serif;
+}
+img {
+    width: 400px; 
+    height: auto;
+}
+
+.login-container {
+    padding: 20px 40px;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.login-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+.login-container p {
+    color: #555;
+    font-weight: bold;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    margin-right:25px ;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5cb85c;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+.password-group .show-password {
+    position:relative;
+    margin-top:-25px;
+    margin-right: -10px;
+    float: right;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.password-group .show-password:hover {
+    color: #4cae4c;
+}

@@ -1,0 +1,225 @@
+* {
+    font-family: Arial, sans-serif;
+}
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.open-btn {
+    position: fixed;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    transition: left 0.3s; /* Added transition for smooth animation */
+}
+.open-btn.hidden {
+    opacity: 0; /* Hide the open button */
+}
+.sidebar {
+    height: 100%;
+    width: 300px; /* Initially open */
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: linear-gradient(135deg, #4d6a34 0%, #274234 100%);
+    padding-top: 20px;
+    color: #f6f6f6;
+    overflow-x: hidden; /* Hide horizontal overflow */
+    transition: width 0.3s ease; /* Added smooth transition */
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+}
+
+.sidebar ul li a {
+    color: #f6f6f6;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.sidebar ul li a:hover {
+    color: #f1f1f1;
+}
+
+.main-content {
+    margin-left: 300px; /* Adjusted for open sidebar */
+    padding: 20px;
+    width: 100%;
+    transition: margin-left 0.3s ease; /* Added smooth transition */
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 10px 0 5px;
+}
+
+form input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+form button {
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #218838;
+}
+
+#inventoryTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#inventoryTable th, #inventoryTable td {
+    border: 1px solid #ddd;
+    padding: 10px; /* Adjust the padding as needed */
+    text-align: left; /* Ensure text alignment is left */
+}
+
+#inventoryTable th {
+    background-color: #f2f2f2;
+}
+
+#inventoryTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#inventoryTable tr:hover {
+    background-color: #ddd;
+}
+
+#inventoryTable tbody tr td button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: #fff;
+}
+
+#inventoryTable tbody tr td button:hover {
+    background-color: #c82333;
+}
+
+
+#salesChart,
+#reportSalesChart {
+    max-width: 100%;
+    height: 400px;
+}
+
+.success-message {
+    color: green;
+    margin-top: 10px;
+}
+
+
+.center-card h3 {
+    text-align: center; /* Center the heading text */
+}
+
+.dashboard-cards, .dashboard-actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.dashboard-card {
+    flex: 1;
+    min-width: 280px;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.dashboard-actions button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.dashboard-actions button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+tbody tr td button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: #fff;
+}
+
+tbody tr td button:hover {
+    background-color: #c82333;
+}
+
+/* Add additional styles as needed */

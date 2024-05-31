@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Inventory Sales Tracking System - Login</title>
+    <link rel="icon" type="image/x-icon" href="img/icon.png">
+    <link rel="stylesheet" href="loginstyle.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <img src="img/cca-logo.png">
+        <h1>Login</h1>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group password-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <span class="show-password" onclick="togglePasswordVisibility()"><i class="fa fa-eye"></i></span>
+            </div>
+            <button type="submit">Login</button>
+            <p>Not signed in yet? <a href="register.html">Register</a></p>
+        </form>
+    </div>
+
+    <script>
+        // Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDONsyQ1X4HJrt7JljV4Q3_hgyICN1OI7M",
+            authDomain: "nstp-2a7d5.firebaseapp.com",
+            projectId: "nstp-2a7d5",
+            storageBucket: "nstp-2a7d5.appspot.com",
+            messagingSenderId: "628088840242",
+            appId: "1:628088840242:web:9dea4ba830ea4c02f05c2b",
+            databaseURL: "https://nstp-2a7d5-default-rtdb.asia-southeast1.firebasedatabase.app"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            var usersRef = firebase.database().ref('users');
+            usersRef.once('value', function(snapshot) {
+                var users = snapshot.val();
+                var loggedIn = false;
+                for (var key in users) {
+                    if (users[key].username === username && users[key].password === password) {
+                        loggedIn = true;
+                        break;
+                    }
+                }
+
+                if (loggedIn) {
+                    alert("Login successful.");
+                    window.location.href = 'index.html';
+                } else {
+                    alert("Invalid username or password.");
+                }
+            }).catch(function(error) {
+                alert("Error: " + error.message);
+            });
+        });
+
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("password");
+            var passwordIcon = document.querySelector(".show-password i");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                passwordIcon.classList.remove("fa-eye");
+                passwordIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                passwordIcon.classList.remove("fa-eye-slash");
+                passwordIcon.classList.add("fa-eye");
+            }
+        }
+    </script>
+</body>
+</html>

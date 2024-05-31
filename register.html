@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Inventory Sales Tracking System - Register</title>
+    <link rel="icon" type="image/x-icon" href="img/icon.png">
+    <link rel="stylesheet" href="registerstyle.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+    <div class="register-container">
+        <img src="img/cca-logo.png">
+        <h1>Register</h1>
+        <form id="register-form">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group password-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <span class="show-password" onclick="togglePasswordVisibility('password')"><i class="fa fa-eye"></i></span>
+            </div>
+            <div class="input-group password-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+                <span class="show-password" onclick="togglePasswordVisibility('confirm-password')"><i class="fa fa-eye"></i></span>
+            </div>
+            <button type="submit">Register</button>
+            <p>Already have an account? <a href="login.html">Log In</a></p>
+        </form>
+    </div>
+
+    <script>
+        // Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDONsyQ1X4HJrt7JljV4Q3_hgyICN1OI7M",
+            authDomain: "nstp-2a7d5.firebaseapp.com",
+            projectId: "nstp-2a7d5",
+            storageBucket: "nstp-2a7d5.appspot.com",
+            messagingSenderId: "628088840242",
+            appId: "1:628088840242:web:9dea4ba830ea4c02f05c2b",
+            databaseURL: "https://nstp-2a7d5-default-rtdb.asia-southeast1.firebasedatabase.app"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var username = document.getElementById('username').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            var usersRef = firebase.database().ref('users');
+            usersRef.once('value', function(snapshot) {
+                var users = snapshot.val();
+                for (var key in users) {
+                    if (users[key].email === email) {
+                        alert("Email already exists.");
+                        return;
+                    }
+                    if (users[key].username === username) {
+                        alert("Username already exists.");
+                        return;
+                    }
+                }
+
+                var userId = usersRef.push().key;
+                usersRef.child(userId).set({
+                    username: username,
+                    email: email,
+                    password: password
+                }).then(function() {
+                    alert("User registered successfully.");
+                    window.location.href = 'index.html';
+                }).catch(function(error) {
+                    alert("Error: " + error.message);
+                });
+            });
+        });
+
+        function togglePasswordVisibility(inputId) {
+            var passwordInput = document.getElementById(inputId);
+            var passwordIcon = passwordInput.nextElementSibling.querySelector("i");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                passwordIcon.classList.remove("fa-eye");
+                passwordIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                passwordIcon.classList.remove("fa-eye-slash");
+                passwordIcon.classList.add("fa-eye");
+            }
+        }
+    </script>
+</body>
+</html>
