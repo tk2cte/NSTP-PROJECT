@@ -349,3 +349,15 @@ header {
   box-shadow: 3px 3px 10px rgb(188, 188, 188);
   padding: 20px 20px 20px 20px;
 }
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+a:link {
+  text-decoration: none;
+}
